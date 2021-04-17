@@ -7,7 +7,7 @@ import ModalAddFood from '../../components/ModalAddFood';
 import ModalEditFood from '../../components/ModalEditFood';
 import { FoodsContainer } from './styles';
 
-export function Dashboard(){
+function Dashboard(){
     const [editingFood, setEditingFood] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
@@ -34,18 +34,18 @@ export function Dashboard(){
       }
 
     const handleUpdateFood = async editedFood => {
-    try {
-        const foodUpdated = await api.put(
-        `/foods/${editingFood.id}`,
-            { ...editedFood },
-        );
-      const foodsUpdated = foods.map(f =>
-        f.id !== foodUpdated.data.id ? f : foodUpdated.data,
-      );
-      setFoods(foodsUpdated);
-    } catch (err) {
-        console.log(err);
-      }
+        try {
+            const foodUpdated = await api.put(
+            `/foods/${editingFood.id}`,
+                { ...editedFood },
+            );
+          const foodsUpdated = foods.map(f =>
+            f.id !== foodUpdated.data.id ? f : foodUpdated.data,
+          );
+          setFoods(foodsUpdated);
+        } catch (err) {
+            console.log(err);
+          }
     }
 
     const handleDeleteFood = async id => {
